@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federated Certificate Verification</title>
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <h1>Federated Certificate Verification System</h1>
+            <p>Privacy-Preserving AI using Federated Learning (Non-IID)</p>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <!-- Left Panel: Uploader & Metadata -->
+        <div class="left-panel">
+            <div class="card upload-section">
+                <h2>Upload Certificate</h2>
+                <div id="drop-zone" class="drop-zone">
+                    <p id="drop-text">Drag and drop a certificate image here, or click to browse.</p>
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                    <img id="preview-image" src="" alt="Certificate Preview" style="display:none;">
+                </div>
+                <button id="analyze-btn" class="btn-primary" disabled>Analyze Certificate</button>
+                <div id="loading" class="loading" style="display:none;">
+                    <div class="spinner"></div>
+                    <p>Aggregating Federation Results...</p>
+                </div>
+            </div>
+
+            <div class="card info-panel">
+                <h3>📊 Federated Learning Specs</h3>
+                <ul>
+                    <li><strong>Total Clients:</strong> 2</li>
+                    <li><strong>Aggregation Method:</strong> FedAvg</li>
+                    <li><strong>Dataset Distribution:</strong> Extreme Non-IID</li>
+                    <li><strong>Backbone:</strong> MobileNetV2</li>
+                </ul>
+                <div class="flow-diagram">
+                    <span>Client 1</span> &rarr; <strong>Central Server</strong> &larr; <span>Client 2</span>
+                </div>
+            </div>
+
+            <div class="card privacy-panel">
+                <div class="privacy-content">
+                    <span class="lock-icon">🔒</span>
+                    <p><strong>Privacy Preserved:</strong> No raw data is ever shared across clients. Only the neural network model weights are aggregated globally.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Comparisons & Visualizations -->
+        <div class="right-panel">
+            <div class="results-container">
+                <div class="result-card" id="card-client1">
+                    <h3>Client Model 1<br><small>(Mixed IID Dataset)</small></h3>
+                    <div class="prediction-box">
+                        <span class="pred-label">--</span>
+                        <span class="pred-conf">--%</span>
+                    </div>
+                </div>
+                
+                <div class="result-card" id="card-client2">
+                    <h3>Client Model 2<br><small>(Roboflow - 100% Fake)</small></h3>
+                    <div class="prediction-box">
+                        <span class="pred-label">--</span>
+                        <span class="pred-conf">--%</span>
+                    </div>
+                </div>
+                
+                <div class="result-card global-card" id="card-global">
+                    <h3>Global Model<br><small>(Federated Average)</small></h3>
+                    <div class="prediction-box">
+                        <span class="pred-label">--</span>
+                        <span class="pred-conf">--%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card chart-section">
+                <h3>📈 Performance & Bias Insight</h3>
+                <p class="chart-desc">
+                    <strong>Note:</strong> Client 2 frequently exhibits bias due to training exclusively on extreme Non-IID data (fake classes only). The robust Global Model securely standardizes learning across domains without sharing raw files.
+                </p>
+                <div class="chart-container">
+                    <canvas id="confidenceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>AI-Based Distributed Document Verification System</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
